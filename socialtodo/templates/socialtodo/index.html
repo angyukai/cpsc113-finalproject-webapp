@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>CPSC113 Todo</title>
+		{% load staticfiles %}
+		<link rel="stylesheet" type="text/css" href="{% static "socialtodo/style.css" %}">
+		<link rel="stylesheet" type="text/css" href="{% static "socialtodo/normalize.css" %}">
+		<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+	</head>
+	<body>
+		<div>
+			{% if error %}
+				<h3 class="validation-error">{{error}}</h3>
+			{% endif %}
+		</div>
+		{% if not user.is_anonymous %}
+			<h1>Welcome, {{user.first_name}}</h1>
+			{% if tasks %}
+				<div class="container">
+					<h2>Your Tasks</h2>
+					<ul class="tasks-list">
+						{% for element in tasks %}
+							<div>
+								<li class= {% if element.isComplete %} "tasks-list-item complete-task" {% else %} "tasks-list-item" {% endif %}>
+								<div class="task-info">
+									<span class="task-title">{{ element.title }}</span>
+									<br>
+									<span class="task-description" style="color: grey;">{{ element.description }}</span>
+									<br>
+								</div>
+								<div class="task-buttons">
+									{% if request.user == element.owner %}
+										<form action="/task/delete" method="post" style="width: 200px; display: inline;">
+											{% csrf_token %}
+											<input type="hidden" name="taskId" value= {{element.id}}>
+											<input type="submit" name="delete-task" class="delete-task" value="Delete">
+										</form>
+									{% endif %}
+									<form action="/task/toggle" method="post" style="width: 200px; display: inline;">
+										{% csrf_token %}
+										<input type="hidden" name="taskId" value= {{element.id}}>
+										<input type="submit" name="toggle-task" class="toggle-task" value="Mark complete">
+									</form>
+								</div>
+							</li>
+						</div>
+					{% endfor %}
+				</ul>
+			</div>
+		{% endif %}
+		<div class="container">
+			<h2>Create Task</h2>
+			<div>
+				<form action="/task/create/" class="create-task" method="post" style="display: block;">
+					{% csrf_token %}
+					{{ task_form }}
+					<input class="create-task-submit" type="submit" value="Submit" />
+					<br>
+					<!-- 		<div>
+						<button class="log-in-submit" value="OK">Log In</button>
+					</div> -->
+				</form>
+			</div>
+		</div>
+		<!-- 		<button type="button" name="button">
+		<a href="/user/logout" class="logout" style="text-decoration: none;">Logout</a>
+		</button> -->
+	{% else %}
+		<h1>CPSC113 Todo</h1>
+		<div class="form-container">
+			<div class="container">
+				
+				<div class="lines"></div>
+				<h2>Log in</h2>
+				<form action="/user/login/" method="post" class="login" style="display: block;">
+					{% csrf_token %}
+					{{ login_form }}
+					<input class="log-in-submit" type="submit" value="Submit" />
+					<br>
+					<!-- 		<div>
+						<button class="log-in-submit" value="OK">Log In</button>
+					</div> -->
+				</form>
+			</div>
+			<div class="container">
+				<h2>Register</h2>
+				<form action="/user/register/" method="post" class="register" style="display: block;">
+					{% csrf_token %}
+					{{ reg_form }}
+					<input  class="sign-up-submit" type="submit" value="Submit" />
+					<br>
+					<!-- 		<div>
+						<button class="sign-up-submit" value="OK">Sign Up</button>
+					</div> -->
+				</form>
+			</div>
+		</div>
+	{% endif %}
+	<button type="button" name="button">
+	<a href="/user/logout" class="logout" style="text-decoration: none;">Logout</a>
+	</button>
+</body>
+</html>

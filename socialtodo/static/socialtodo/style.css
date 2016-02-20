@@ -1,0 +1,112 @@
+body {
+  background-image: url('http://www.danieleliberti.org/wp-content/uploads/2014/08/20140819_backgroundk-1024x640.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  font-size: 1.5em;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.validation-error {
+  color: #FF6B59;
+  text-align: center;
+}
+
+h1 {
+  text-align: center;
+  color: white;
+}
+.form-container {
+  margin: auto;
+}
+.container {
+  background-color: white;
+  display: block;
+  float: left;
+  padding: 5%;
+  padding-top: 2%;
+  margin: 7%;
+  margin-top: 0px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+form > input, label {
+  display: block;
+  padding: 5px;
+  margin: 10px;
+}
+
+form > input {
+  background-color: #e2e2e2;
+}
+
+.log-in-submit, .sign-up-submit, .create-task-submit, button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+button {
+  position: fixed;
+  top: 30px;
+  right: 30px;
+}
+
+.logout {
+  color: white;
+  text-decoration: none;
+}
+
+.tasks-list {
+  width: 500px;
+  padding-left: 0px;
+  padding-bottom: 0px;
+}
+.tasks-list-item {
+  list-style: none;
+  display: flex;
+  padding-bottom: 20px;
+}
+
+.tasks-list-item span {
+  width: 250px;
+  overflow: contain;
+  float: left;
+  display: block;
+  word-wrap:break-word;
+}
+
+.tasks-list-item form {
+  display: block;
+}
+
+.task-buttons {
+  width: 220px;
+}
+
+.task-buttons > form > input {
+  width: 200px;
+}
+
+.task-info {
+  width: 400px;
+}
+
+.delete-task  {
+  background-color: red;
+  color: white;
+  border: none;
+}
+
+.toggle-task {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
